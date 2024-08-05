@@ -85,19 +85,20 @@ cmd trash2 %{{
 }}
 
 # Bindings
-map d
-map m
+map d # default cut
+map m # default mark-save
 
 map au unarchive
 
 # Basic Functions
 map . set hidden!
-map dd trash2
-# map dr restore_trash
+map d1 trash
+map d2 trash2
+map dr restore_trash
 map p paste
 map x cut
 map y copy
-# map <enter> open
+map <enter> open
 map R reload
 map mf mkfile
 map md mkdir

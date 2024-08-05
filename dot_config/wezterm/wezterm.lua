@@ -16,7 +16,8 @@ c.font_size = 11
 c.enable_scroll_bar = true
 
 -- Remove decorations but allow window resize
-c.window_decorations = 'RESIZE'
+c.window_decorations = 'INTEGRATED_BUTTONS|RESIZE'
+-- c.integrated_title_button_style = 'Gnome'
 
 -- $TERM (tirar o padrão tá quebrando ssh)
 -- c.term = 'wezterm'
@@ -35,7 +36,7 @@ wezterm.on(
 )
 
 if true then
-    return c
+  return c
 else
-    return require 'gdanko.wezterm'
+  return require 'gdanko.wezterm'
 end

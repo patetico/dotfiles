@@ -6,10 +6,10 @@ local act = wezterm.action
 --- @alias SimpleKeyBind [string, string, unknown]
 --- @alias KeyBind { key: string, mods: string, action: unknown }
 
----@generic T, U
----@param t T[]
----@param fn fun(v: T): U
----@return U[]
+--- @generic T, U
+--- @param t T[]
+--- @param fn fun(v: T): U
+--- @return U[]
 local function tableMap(t, fn)
   local res = {}
   for k, v in pairs(t) do
@@ -85,8 +85,8 @@ local _keys = {
 
   { 'SHIFT',          'PageUp',     act.ScrollByPage(-1), },
   { 'SHIFT',          'PageDown',   act.ScrollByPage(1), },
-  { 'SHIFT',          'UpArrow',     act.ScrollByLine(-1), },
-  { 'SHIFT',          'DownArrow',   act.ScrollByLine(1), },
+  { 'SHIFT',          'UpArrow',    act.ScrollByLine(-1), },
+  { 'SHIFT',          'DownArrow',  act.ScrollByLine(1), },
 
   { 'CTRL|SHIFT',     'LeftArrow',  act.ActivatePaneDirection 'Left', },
   { 'CTRL|SHIFT',     'RightArrow', act.ActivatePaneDirection 'Right', },

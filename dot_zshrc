@@ -55,7 +55,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 # or set a custom format using the strftime function format specifications,
 # see 'man strftime' for details.
-HIST_STAMPS="%Y.%m.%d"
+HIST_STAMPS="yyyy-mm-dd"
 
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
