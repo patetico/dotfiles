@@ -1,0 +1,9 @@
+gui:
+  nerdFontsVersion: "3"
+  spinner:
+    frames: ["◜", "◠", "◝", "◞", "◡", "◟"]
+
+git:
+  paging:
+    colorArg: always
+    pager: delta --dark --paging=never
