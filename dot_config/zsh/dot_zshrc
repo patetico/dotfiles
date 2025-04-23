@@ -1,0 +1,48 @@
+#!/bin/zsh
+
+# https://github.com/mattmc3/ez-compinit
+zstyle ':plugin:ez-compinit' 'compstyle' 'prez'
+zstyle ':plugin:ez-compinit' 'use-cache' 'yes'
+zstyle ':completion:*' 'use-cache' 'yes'
+
+eval "$(sheldon source)"
+eval "$(starship init zsh)"
+
+setopt long_list_jobs      # show long list format job notifications
+setopt interactivecomments # recognize comments
+
+## Load init files on zshrc.d
+function {
+  local init_file
+  for init_file in ${ZDOTDIR}/zshrc.d/*.zsh; do
+    source "$init_file"
+  done
+}
+
+function zreload {
+  local zsh="${ZSH_ARGZERO#-}"
+  # Check whether to run a login shell
+  [[ -o login ]] && exec -l "$zsh" || exec "$zsh"
+}
+
+function {
+  # remove duplicates in path just in case
+  local -a tmp_path
+  local p
+
+  for p in $path; do
+    (( ! $tmp_path[(Ie)$p] )) && tmp_path+=("$p");
+  done
+
+  path=($tmp_path)
+}
+
+function add_path() {
+  (( ! $path[(Ie)$1] )) && path+=("$1");
+}
+
+source /usr/share/nvm/init-nvm.sh             # nvm
+[[ -n $PNPM_HOME ]] && add_path "$PNPM_HOME"  # pnpm
+[[ -n $GOPATH ]] && add_path "${GOPATH}/bin"  # golang
+
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local || true
