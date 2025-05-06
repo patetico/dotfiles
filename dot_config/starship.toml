@@ -1,0 +1,230 @@
+# == General =========================================================
+format = """
+$username\
+$hostname\
+$localip\
+$singularity\
+$kubernetes\
+$directory\
+$vcsh\
+$fossil_branch\
+$fossil_metrics\
+$git_branch\
+$git_commit\
+$git_state\
+$git_metrics\
+$git_status\
+$hg_branch\
+$pijul_channel\
+\
+$fill\
+\
+(\
+$memory_usage\
+$aws\
+$gcloud\
+$openstack\
+$azure\
+$nats\
+$direnv\
+$env_var\
+$custom\
+$sudo\
+${cmd_duration}\
+| )\
+\
+$docker_context\
+$package\
+$c\
+$cmake\
+$cobol\
+$crystal\
+$daml\
+$dart\
+$deno\
+$dotnet\
+$elixir\
+$elm\
+$erlang\
+$fennel\
+$gleam\
+$golang\
+$guix_shell\
+$haskell\
+$haxe\
+$helm\
+$java\
+$julia\
+$kotlin\
+$gradle\
+$lua\
+$nim\
+$nodejs\
+$ocaml\
+$opa\
+$perl\
+$php\
+$pulumi\
+$purescript\
+$python\
+$quarto\
+$raku\
+$rlang\
+$red\
+$ruby\
+$rust\
+$scala\
+$solidity\
+$swift\
+$terraform\
+$typst\
+$vlang\
+$vagrant\
+$zig\
+$buf\
+$nix_shell\
+$conda\
+$meson\
+$spack\
+\
+$line_break\
+\
+$shlvl\
+$character
+"""
+
+right_format = """
+$jobs\
+$battery\
+$time\
+$status\
+$os\
+$container\
+$shell
+"""
+
+continuation_prompt = "[∙](bright-black) "
+
+[fill]
+symbol = ' '
+
+[username]
+format = '[$user]($style)'
+style_root = 'red'
+style_user = 'cyan'
+
+[hostname]
+ssh_symbol = '[@](white dimmed)'
+style = 'cyan'
+format = '[$ssh_symbol$hostname]($style)'
+
+[directory]
+format = ':[$path]($style)[$read_only]($read_only_style) '
+repo_root_format = """\
+:[$before_root_path]($before_repo_root_style)\
+[$repo_root]($repo_root_style)\
+[$path]($style)\
+[$read_only]($read_only_style)\
+"""
+truncation_length = 8
+truncation_symbol = '…/'
+truncate_to_repo = false
+style = 'blue bold'
+before_repo_root_style = 'white dimmed'
+repo_root_style = 'blue bold underline'
+
+[character]
+success_symbol = '[λ](green)'
+error_symbol = '[λ](red)'
+vimcmd_symbol = '[μ](green)'
+vimcmd_replace_one_symbol = '[μ](purple)'
+vimcmd_replace_symbol = '[μ](purple)'
+vimcmd_visual_symbol = '[μ](yellow)'
+
+[shlvl]
+disabled = false
+format = "[$symbol]($style)"
+symbol = '↪'
+repeat = true
+threshold = 2
+repeat_offset = 1
+style = ''
+
+[jobs]
+format = '[ $symbol$number]($style)'
+symbol = ''
+number_threshold = 2
+
+[status]
+disabled = false
+format = "[ $symbol $status( $signal_name)]($style)"
+symbol = "❌"
+# ====================================================================
+# == Enviroment ======================================================
+[sudo]
+disabled = false
+format = '[$symbol ]($style)'
+symbol = '🧙'
+
+[cmd_duration]
+format = '[󱦟$duration ]($style)'
+# ====================================================================
+# == VCS =============================================================
+[git_branch]
+format = ' [$symbol$branch(:$remote_branch)]($style)'
+style = 'bold purple'
+symbol = ' '
+truncation_length = 20
+
+[git_status]
+format = '( $up_to_date$ahead_behind)( [\[$all_status\]]($style))'
+
+up_to_date = '[✔](green)'
+ahead = '[⇡${count}](green)'
+diverged = '[⇡${ahead_count}](green)⇕[${behind_count}⇣](red)'
+behind = '[⇣${count}](red)'
+
+style = 'red'
+conflicted = 'C'
+stashed = ''
+deleted = 'D'
+renamed = 'R'
+modified = 'M'
+typechanged = 'T'
+staged = 'S'
+untracked = 'U'
+
+[git_commit]
+tag_disabled = false
+tag_symbol = '🏷 '
+# ====================================================================
+# == Programming =====================================================
+[package]
+disabled = true
+
+[python]
+format = ' [${symbol}${pyenv_prefix}($version)( \($virtualenv\))]($style)'
+symbol = ''
+pyenv_prefix = ' pyenv'
+version_format = '$raw'
+
+[lua]
+format = ' [$symbol($version)]($style)'
+symbol = ''
+version_format = '$raw'
+
+[nodejs]
+format = ' [$symbol($version)]($style)'
+symbol = '󰎙'
+version_format = '$raw'
+
+[rust]
+format = ' [$symbol($version)]($style)'
+symbol = ''
+version_format = '$raw'
+
+[typst]
+format = ' [$symbol($version)]($style)'
+symbol = ''
+version_format = '$raw'
+# ====================================================================
