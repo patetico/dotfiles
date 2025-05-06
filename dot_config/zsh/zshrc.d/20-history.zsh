@@ -64,12 +64,13 @@ function history_stats() {
       }
     }'
 
-  data=(${(@f)$(builtin fc -nl 1 | awk -v limit="${1:-20}" "$awk_cmd")})
+  data=("${(@f)$(builtin fc -nl 1 | awk -v limit="${1:-20}" "$awk_cmd")}")
   footer=(${(s: :)data[1]})
   shift data
 
-  column -t -l 4 -N ' ,qty,perc,command' -R '1,2,3' <<<$data
+  column -t -N ' ,qty,perc,command' -R '1,2,3' <<<${(pj:\n:)data}
   echo "---"
   echo "# history entries: ${footer[1]}"
   echo "# unique commands: ${footer[2]}"
 }
+

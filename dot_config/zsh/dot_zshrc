@@ -41,6 +41,7 @@ function add_path() {
   (( ! $path[(Ie)$1] )) && path+=("$1");
 }
 
+# TODO: nvim takes forever to load and should be lazy loaded
 source /usr/share/nvm/init-nvm.sh             # nvm
 [[ -n $PNPM_HOME ]] && add_path "$PNPM_HOME"  # pnpm
 [[ -n $GOPATH ]] && add_path "${GOPATH}/bin"  # golang
