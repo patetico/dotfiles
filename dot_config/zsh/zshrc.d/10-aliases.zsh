@@ -24,3 +24,7 @@ alias grep="grep -Pi --color=auto"
 alias dockx="docker run --rm"
 alias dockxu='docker run --rm -u $(id -u):$(id -g)'
 alias dockps="docker ps -a --format 'table {{.ID}}\t{{.Image}}\t{{.Status}}\t{{.Names}}'"
+
+alias ldocker="lazydocker"
+alias lgit="lazygit"
+
