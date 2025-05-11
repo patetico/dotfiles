@@ -41,9 +41,16 @@ function add_path() {
   (( ! $path[(Ie)$1] )) && path+=("$1");
 }
 
-# TODO: nvim takes forever to load and should be lazy loaded
-source /usr/share/nvm/init-nvm.sh             # nvm
+function _try_source() {
+  [[ -f "$1" ]] && source "$1"
+}
+
+# TODO: nvm takes forever to initialize so it should be lazy loaded
+_try_source /usr/share/nvm/init-nvm.sh             # nvm
 [[ -n $PNPM_HOME ]] && add_path "$PNPM_HOME"  # pnpm
 [[ -n $GOPATH ]] && add_path "${GOPATH}/bin"  # golang
 
-[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local || true
+_try_source "${DOTDIR:-$HOME}/.config/zsh/.zshrc.local"
+
+unfunction _try_source
+
