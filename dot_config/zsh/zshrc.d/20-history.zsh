@@ -5,6 +5,7 @@ HISTFILE="${ZDOTDIR:-$HOME}/.zhistory"
 HISTSIZE=50000
 SAVEHIST=10000
 
+setopt auto_pushd             # add path to history everytime user calls cd
 setopt extended_history       # record timestamp of command in HISTFILE
 setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
 setopt hist_ignore_dups       # ignore duplicated commands history list
