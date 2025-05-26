@@ -9,8 +9,10 @@ c.color_scheme = "Gooey (Gogh)" -- testar até 20/jun/24
 -- c.color_scheme = "Solarized Dark (Gogh)" -- próximo teste
 
 -- make sure to use a font you have installed
-c.font = wezterm.font 'Source Code Pro'
-c.font_size = 11
+c.font = wezterm.font 'SauceCodePro Nerd Font Mono'
+-- c.font = wezterm.font 'Source Code Pro'
+c.font_size = 10
+c.freetype_load_target = "HorizontalLcd"
 
 -- scroll bar
 c.enable_scroll_bar = true
