@@ -28,3 +28,5 @@ alias dockps="docker ps -a --format 'table {{.ID}}\t{{.Image}}\t{{.Status}}\t{{.
 alias ldocker="lazydocker"
 alias lgit="lazygit"
 
+alias y=yazi
+
