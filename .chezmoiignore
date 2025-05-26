@@ -2,3 +2,9 @@
 .config/zsh/.zhistory
 .config/zsh/*.local
 
+{{- if ne .chezmoi.os "linux" }}
+.zshenv
+.config/zsh
+.config/sheldon
+{{- end }}
+
