@@ -1,0 +1,3 @@
+return {
+  { "cmcaine/vim-uci" },
+}
