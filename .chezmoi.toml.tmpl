@@ -2,7 +2,7 @@
 pager = "delta"
 
 [data]
-{{- $email := promptString "Email" }}
+{{ $email := promptString "Email" }}
 email = {{ $email | quote }}
-{{- $user := promptString "Username" .chezmoi.username }}
+{{ $user := promptString "Username" (.chezmoi.username | regexFind "[^\\\\]+$") }}
 user = {{ $user | quote }}
