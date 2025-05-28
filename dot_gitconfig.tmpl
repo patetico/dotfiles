@@ -1,16 +1,42 @@
+{{ $vscode := lookPath "code" | replace "\\" "/" -}}
+{{ $vscodeQuoted := $vscode | quote | replace "\"" "\\\"" -}}
+
+
 [user]
-	name = {{- .user }}
-	email = {{- .email }}
+	name = {{ .user }}
+	email = {{ .email }}
+
 [core]
 	pager = delta
+	eol = lf
+	autocrlf = input
+
 [interactive]
 	diffFilter = delta --color-only
+
 [delta]
 	navigate = true
+
 [merge]
-	conflictstyle = diff3
+	conflictstyle = zdiff3
+{{- if $vscode }}
+	guitool = vscode
+
+[mergetool "vscode"]
+	path = {{ $vscode }}
+	cmd = {{ $vscodeQuoted }} --wait \"$MERGED\"
+{{- end }}
+
 [diff]
 	colorMoved = default
+{{- if $vscode }}
+	guitool = vscode
+
+[difftool "vscode"]
+	path = {{ $vscode }}
+	cmd = {{ $vscodeQuoted }} --wait --diff \"$LOCAL\" \"$REMOTE\"
+{{- end }}
+
 [alias]
 	st = status
 	a = add
@@ -23,7 +49,12 @@
 	llg = log --oneline --graph
 	aliases = "! git config get --all --show-names --show-scope --regexp '^alias\\.' | sort | sed -E -e 's/alias.(\\S*)\\s+/\\o033[1;31m\\1\\o033[2;m=\\o033[0m/' -e 's/(^\\w+)\\s+/\\o033[2;36m\\1|\\o033[0m/'"
 	root = rev-parse --show-toplevel
+
 [init]
 	defaultBranch = main
+
 [pull]
 	ff = only
+
+[rebase]
+	autoStash = true
