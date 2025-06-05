@@ -1,10 +1,5 @@
 #!/bin/zsh
 
-# https://github.com/mattmc3/ez-compinit
-zstyle ':plugin:ez-compinit' 'compstyle' 'prez'
-zstyle ':plugin:ez-compinit' 'use-cache' 'yes'
-zstyle ':completion:*' 'use-cache' 'yes'
-
 eval "$(sheldon source)"
 eval "$(starship init zsh)"
 
@@ -46,12 +41,18 @@ function _try_source() {
   [[ -f "$1" ]] && source "$1"
 }
 
-# TODO: nvm takes forever to initialize so it should be lazy loaded
-_try_source /usr/share/nvm/init-nvm.sh        # nvm
+function _try_lazy_source() {
+  [[ -f "$1" ]] && zsh-defer source "$1"
+}
+
+# nvm
+_try_lazy_source /usr/share/nvm/init-nvm.sh || {
+  _try_lazy_source "${NVM_DIR}/nvm.sh"
+  _try_lazy_source "${NVM_DIR}/bash_completion"
+}
 [[ -n $PNPM_HOME ]] && add_path "$PNPM_HOME"  # pnpm
 [[ -n $GOPATH ]] && add_path "${GOPATH}/bin"  # golang
 
 _try_source "${DOTDIR:-$HOME}/.config/zsh/.zshrc.local"
 
 unfunction _try_source
-

@@ -37,6 +37,12 @@ github = "romkatv/zsh-defer"
 
 [plugins.ez-compinit]
 github = "mattmc3/ez-compinit"
+[plugins.ez-compinit.hooks]
+pre = """
+zstyle ':plugin:ez-compinit' 'compstyle' 'prez'
+zstyle ':plugin:ez-compinit' 'use-cache' 'yes'
+zstyle ':completion:*' 'use-cache' 'yes'
+"""
 
 [plugins.omz-gitfast]
 # TODO: completion without this plugin is actually better. not sure how much slower on large-ish repos
@@ -47,13 +53,6 @@ apply = ["fpath"]
 [plugins.omz-colored-man-pages]
 github = "ohmyzsh/ohmyzsh"
 dir = "plugins/colored-man-pages"
-
-[plugins.omz-nvm]
-github = "ohmyzsh/ohmyzsh"
-dir = "plugins/nvm"
-# profiles = ["skip"]
-# [plugins.omz-nvm.hooks]
-# pre = "export NVM_DIR=/usr/share/nvm"
 
 [plugins.fast-syntax-highlighting]
 github = "zdharma-continuum/fast-syntax-highlighting"
