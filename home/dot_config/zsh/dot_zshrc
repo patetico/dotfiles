@@ -8,8 +8,9 @@ zstyle ':completion:*' 'use-cache' 'yes'
 eval "$(sheldon source)"
 eval "$(starship init zsh)"
 
-setopt long_list_jobs      # show long list format job notifications
-setopt interactivecomments # recognize comments
+setopt long_list_jobs       # show long list format job notifications
+setopt interactivecomments  # recognize comments
+setopt autocd               # cd if possible when command not found
 
 ## Load init files on zshrc.d
 function {
@@ -19,7 +20,7 @@ function {
   done
 }
 
-function zreload {
+function zreload() {
   local zsh="${ZSH_ARGZERO#-}"
   # Check whether to run a login shell
   [[ -o login ]] && exec -l "$zsh" || exec "$zsh"
@@ -46,7 +47,7 @@ function _try_source() {
 }
 
 # TODO: nvm takes forever to initialize so it should be lazy loaded
-_try_source /usr/share/nvm/init-nvm.sh             # nvm
+_try_source /usr/share/nvm/init-nvm.sh        # nvm
 [[ -n $PNPM_HOME ]] && add_path "$PNPM_HOME"  # pnpm
 [[ -n $GOPATH ]] && add_path "${GOPATH}/bin"  # golang
 

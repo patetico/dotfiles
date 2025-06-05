@@ -16,7 +16,7 @@ setopt share_history          # share command history data
 # == History wrapper (modified from ohmyzh) =====
 function history {
   local clear list stamp="-i" REPLY
-  zparseopts -E -D c=clear l=list f=stamp E=stamp i=stamp t:=stamp
+  zparseopts -E -D -K c=clear l=list f=stamp E=stamp i=stamp t:=stamp
 
   if [[ -n "$clear" ]]; then
     # delete history if -c is provided
@@ -44,16 +44,16 @@ function history_stats() {
 
   awk_cmd='
     function cmp_num_desc(i1, v1, i2, v2) { return (v2 - v1); }
-    
+
     BEGIN {
         delete count[0]
     }
-    
+
     {
       cmd = ($1 != "sudo") ? $1 : $2;
       if (cmd !~ /.\//) count[cmd]++;
     }
-    
+
     END {
       # history size and unique commands
       printf "%d %d\n", NR, length(count);

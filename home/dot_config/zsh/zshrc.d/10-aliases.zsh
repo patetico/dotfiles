@@ -4,6 +4,10 @@ alias -g ...='../..'
 alias -g ....='../../..'
 alias -g .....='../../../..'
 alias -g ......='../../../../..'
+alias -g .2='../..'
+alias -g .3='../../..'
+alias -g .4='../../../..'
+alias -g .5='../../../../..'
 
 alias d='dirs -v'
 
@@ -19,14 +23,23 @@ alias rd=rmdir
 alias ls='ls --color=auto --group-directories-first'
 alias l='ls -lahF'
 
-alias grep="grep -Pi --color=auto"
+alias grep='grep -Pi --color=auto'
 
-alias dockx="docker run --rm"
-alias dockxu='docker run --rm -u $(id -u):$(id -g)'
-alias dockps="docker ps -a --format 'table {{.ID}}\t{{.Image}}\t{{.Status}}\t{{.Names}}'"
+alias dkr='docker'
+alias dkrx='docker run --rm'
+alias dkrxu='docker run --rm -u $(id -u):$(id -g)'
+alias dkrps="docker ps -a --format 'table {{.ID}}\t{{.Image}}\t{{.Status}}\t{{.Names}}'"
 
-alias ldocker="lazydocker"
-alias lgit="lazygit"
+alias dco='docker compose'
+alias dcou='docker compose up -d'
+alias dcod='docker compose down'
+alias dcop='docker compose pull'
 
-alias y=yazi
+alias ldocker='lazydocker'
+alias ldkr='lazydocker'
+alias lgit='lazygit'
 
+alias cz='chezmoi'
+alias y='yazi'
+
+alias myip='dig +short myip.opendns.com @resolver1.opendns.com'
