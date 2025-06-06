@@ -53,6 +53,11 @@ _try_lazy_source /usr/share/nvm/init-nvm.sh || {
 [[ -n $PNPM_HOME ]] && add_path "$PNPM_HOME"  # pnpm
 [[ -n $GOPATH ]] && add_path "${GOPATH}/bin"  # golang
 
+which bat >/dev/null && {
+  export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+  export MANROFFOPT="-c"
+}
+
 _try_source "${DOTDIR:-$HOME}/.config/zsh/.zshrc.local"
 
-unfunction _try_source
+unfunction _try_source _try_lazy_source

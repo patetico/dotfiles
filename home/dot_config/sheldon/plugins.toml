@@ -21,6 +21,7 @@ zsh-defer source "{{ file }}"
 {% endfor %}
 {{ hooks?.post | nl }}
 """
+# for debugging:
 echo_file = """
 {{ hooks?.pre | nl }}
 {% for file in files %}
@@ -50,9 +51,9 @@ github = "ohmyzsh/ohmyzsh"
 dir = "plugins/gitfast"
 apply = ["fpath"]
 
-[plugins.omz-colored-man-pages]
-github = "ohmyzsh/ohmyzsh"
-dir = "plugins/colored-man-pages"
+[plugins.zsh-autopair]
+github = "hlissner/zsh-autopair"
+apply = ["defer"]
 
 [plugins.fast-syntax-highlighting]
 github = "zdharma-continuum/fast-syntax-highlighting"
