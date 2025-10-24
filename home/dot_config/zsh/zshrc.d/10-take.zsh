@@ -33,6 +33,10 @@ function takegit() {
   cd "$(basename ${1%%.git})"
 }
 
+function taketmp() {
+  cd "$(mktemp -d)"
+}
+
 function take() {
   if [[ $1 =~ ^(https?|ftp).*\.(tar\.(gz|bz2|xz)|tgz)$ ]]; then
     takeurl "$1"
