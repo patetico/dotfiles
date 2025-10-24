@@ -1,0 +1,3 @@
+#!/bin/zsh
+
+chezmoi verify || echo "\n ‼️ WARN: chezmoi data is unsynced ‼️"
