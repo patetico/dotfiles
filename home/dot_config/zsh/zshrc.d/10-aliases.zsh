@@ -14,7 +14,7 @@ alias d='dirs -v'
 alias -- -='cd -'
 
 # directory stack
-for index in $(seq 1 9); do alias "$index"="cd -${index}"; done
+for index in $(seq 1 9); do alias "$index"="cd +${index}"; done
 unset index
 
 alias md='mkdir -p'
