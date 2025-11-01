@@ -1,6 +1,8 @@
-{{ $vscode := lookPath "code" | replace "\\" "/" -}}
-{{ $vscodeQuoted := $vscode | quote | replace "\"" "\\\"" -}}
-
+{{ $hasVSCodium := lookPath "codium" | empty | not -}}
+{{ $guitool := "vscode" -}}
+{{ if $hasVSCodium -}}
+	{{- $guitool = "vscodium" -}}
+{{ end -}}
 
 [user]
 	name = {{ .user }}
@@ -19,22 +21,19 @@
 
 [merge]
 	conflictstyle = zdiff3
-{{- if $vscode }}
-	guitool = vscode
-
-[mergetool "vscode"]
-	path = {{ $vscode }}
-	cmd = {{ $vscodeQuoted }} --wait \"$MERGED\"
-{{- end }}
+	guitool = {{ $guitool }}
 
 [diff]
 	colorMoved = default
-{{- if $vscode }}
-	guitool = vscode
+	guitool = {{ $guitool }}
 
-[difftool "vscode"]
-	path = {{ $vscode }}
-	cmd = {{ $vscodeQuoted }} --wait --diff \"$LOCAL\" \"$REMOTE\"
+{{- if $hasVSCodium }}
+
+[mergetool "vscodium"]
+	cmd = codium --wait \"$MERGED\"
+
+[difftool "vscodium"]
+	cmd = codium --wait --diff \"$LOCAL\" \"$REMOTE\"
 {{- end }}
 
 [alias]
