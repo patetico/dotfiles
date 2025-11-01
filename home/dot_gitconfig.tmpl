@@ -45,6 +45,8 @@
 	pfwl = push --force-with-lease
 	fe = fetch
 	pl = pull
+	br = branch
+	sw = switch
 	ll = log --oneline
 	llg = log --oneline --graph
 	aliases = "! git config get --all --show-names --show-scope --regexp '^alias\\.' | sort | sed -E -e 's/alias.(\\S*)\\s+/\\o033[1;31m\\1\\o033[2;m=\\o033[0m/' -e 's/(^\\w+)\\s+/\\o033[2;36m\\1|\\o033[0m/'"
