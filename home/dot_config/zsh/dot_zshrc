@@ -47,12 +47,21 @@ function _try_lazy_source() {
 }
 
 # nvm
-_try_lazy_source /usr/share/nvm/init-nvm.sh || {
-  _try_lazy_source "${NVM_DIR}/nvm.sh"
-  _try_lazy_source "${NVM_DIR}/bash_completion"
+function {
+  local src_fn=_try_lazy_source
+
+	# the JetBrains terminal crashes if nvm initialization is defered
+  [[ "$TERMINAL_EMULATOR" == 'JetBrains-JediTerm'  ]] && src_fn=_try_source
+  
+	$src_fn /usr/share/nvm/init-nvm.sh || {
+    $src_fn "${NVM_DIR}/nvm.sh"
+    $src_fn "${NVM_DIR}/bash_completion"
+  }
 }
-[[ -n $PNPM_HOME ]] && add_path "$PNPM_HOME"  # pnpm
-[[ -n $GOPATH ]] && add_path "${GOPATH}/bin"  # golang
+
+[[ -n $PNPM_HOME ]] && add_path "$PNPM_HOME"            # pnpm
+[[ -n $GOPATH ]] && add_path "${GOPATH}/bin"            # golang
+add_path "${XDG_DATA_HOME}/JetBrains/Toolbox/scripts"   # JetBrains IDEs
 
 which bat >/dev/null && {
   export MANPAGER="sh -c 'col -bx | bat -l man -p'"
