@@ -63,7 +63,7 @@ function {
 [[ -n $GOPATH ]] && add_path "${GOPATH}/bin"            # golang
 add_path "${XDG_DATA_HOME}/JetBrains/Toolbox/scripts"   # JetBrains IDEs
 
-which bat >/dev/null && {
+hascmd bat && {
   export MANPAGER="sh -c 'col -bx | bat -l man -p'"
   export MANROFFOPT="-c"
 }
