@@ -1,7 +1,11 @@
 #!/bin/zsh
 
 # http://zsh.sourceforge.net/Doc/Release/Zsh-Line-Editor.html
+# there's a list of useful widgets in the section "Standard Widgets" (https://zsh.sourceforge.io/Doc/Release/Zsh-Line-Editor.html#Standard-Widgets)
+# 
 # check `man terminfo` for key codes https://man7.org/linux/man-pages/man5/terminfo.5.html
+
+CUSTOM_KEYMAP="patetico"
 
 if (( ${+terminfo[smkx]} && ${+terminfo[rmkx]} )); then
   # Make sure the terminal is in application mode when zle is
@@ -34,14 +38,13 @@ function __hotkey() {
       [[ -z "$key" ]] && continue
     fi
 
-    for mode in emacs viins vicmd; do
-      bindkey -M $mode "$key" "$cmd"
-    done
+		bindkey "$key" "$cmd"
   done
 }
 
-# Use emacs key bindings
-bindkey -e
+# Use emacs key bindings as base
+bindkey -N $CUSTOM_KEYMAP emacs
+bindkey -A $CUSTOM_KEYMAP main
 
 __hotkey up-line-or-history kpp                        # [PageUp] Up a line of history
 __hotkey down-line-or-history knp                      # [PageDown] Down a line of history
@@ -59,6 +62,9 @@ __hotkey history-incremental-search-backward '^r'      # [Ctrl-r] Search backwar
 __hotkey magic-space ' '                               # [Space] don't do history expansion
 __hotkey -w edit-command-line '^x^e'                   # [ctrl+x ctrl+e] Edit the current command line in $EDITOR
 __hotkey copy-prev-shell-word '^[m'                    # [Alt-m] repeat last word
+
+# `edit-command-line` tries $VISUAL before $EDITOR but we want the opposite priority
+[[ -n $EDITOR || -n $VISUAL ]] && zstyle ':zle:edit-command-line' editor "${EDITOR:-$VISUAL}"
 
 bindkey -s '\el' 'ls\n' # [Alt-l] run command: ls
 
