@@ -21,6 +21,7 @@ export NVM_DIR="${XDG_DATA_HOME}/nvm"
 export PNPM_HOME="${XDG_DATA_HOME}/pnpm"
 export RUSTUP_HOME="${XDG_DATA_HOME}/rustup"
 export WINEPREFIX="${XDG_DATA_HOME}/wine"
+export ANDROID_HOME="${XDG_DATA_HOME}/android/sdk"
 
 # note: remember to add a symlink at $ZDOTDIR/.zshenv to this file changes can
 # 	be applied without a restart.
